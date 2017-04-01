@@ -1,7 +1,7 @@
 # Ansible CUDA installation from source
 
 [![Build Status](https://travis-ci.org/slothai/ansible-cuda.svg?branch=master)](https://travis-ci.org/slothai/ansible-cuda)
-[![Ansible Galaxy](https://img.shields.io/ansible/role/<id>.svg)](https://galaxy.ansible.com/slothai/cuda/)
+[![Ansible Galaxy](https://img.shields.io/ansible/role/16763.svg)](https://galaxy.ansible.com/slothai/cuda/)
 
 This role installs and configures NVIDIA [CUDA](https://developer.nvidia.com/cuda-zone) 8.0 library, used for GPU computations.
 
