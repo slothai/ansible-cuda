@@ -30,5 +30,5 @@
 - name: CUDA | Install cuda package from repository
   apt:
     name: cuda
-    state: present
+    state: latest
     update_cache: yes
