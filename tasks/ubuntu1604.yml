@@ -1,0 +1,17 @@
+- name: Check if cuda-repo-ubuntu1604-8-0-local-ga2.deb is installed
+  command: dpkg-query -f '${binary:Package}\n' --show cuda-repo-ubuntu1604-8-0-local-ga2
+  register: cuda_repo_ubuntu_install_check
+  ignore_errors: yes
+  changed_when: "{{cuda_repo_ubuntu_install_check | failed}}"
+
+- name: CUDA | Download deb package for Ubuntu 16.04
+  get_url:
+    url: https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb
+    dest: /tmp/cuda_install.deb
+    checksum: md5:d735c7fed8be0e72fa853f65042d5438
+  when: "{{cuda_repo_ubuntu_install_check | failed}}"
+
+- name: CUDA | Install downloaded deb package for Ubuntu 16.04
+  apt:
+    deb: /tmp/cuda_install.deb
+  when: "{{cuda_repo_ubuntu_install_check | failed}}"

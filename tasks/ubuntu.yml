@@ -5,27 +5,15 @@
     name: linux-headers-{{ansible_kernel}}
     state: present
 
-- name: CUDA | Download deb package
-  get_url:
-    url: https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1404-8-0-local-ga2_8.0.61-1_amd64-deb
-    dest: /tmp/cuda_install.deb
-    checksum: md5:a4b9657a8ee026e0c97270b2d4174a8a
+- include: ubuntu1404.yml
   when:
     - ansible_distribution == "Ubuntu"
     - ansible_distribution_version == "14.04"
 
-- name: CUDA | Download deb package
-  get_url:
-    url: https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1604-8-0-local-ga2_8.0.61-1_amd64-deb
-    dest: /tmp/cuda_install.deb
-    checksum: md5:d735c7fed8be0e72fa853f65042d5438
+- include: ubuntu1604.yml
   when:
     - ansible_distribution == "Ubuntu"
     - ansible_distribution_version == "16.04"
-
-- name: CUDA | Install downloaded deb package
-  apt:
-    deb: /tmp/cuda_install.deb
 
 - name: CUDA | Install cuda package from repository
   apt:

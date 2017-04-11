@@ -1,0 +1,20 @@
+- name: Check if cuda-repo-ubuntu1404-8-0-local-ga2.deb is installed
+  command: dpkg-query -f '${binary:Package}\n' --show cuda-repo-ubuntu1404-8-0-local-ga2
+  register: cuda_repo_ubuntu_install_check
+  changed_when: "{{cuda_repo_ubuntu_install_check | failed}}"
+  ignore_errors: yes
+
+- debug:
+    msg: cuda_repo_ubuntu_install_check
+
+- name: CUDA | Download deb package for Ubuntu 14.04
+  get_url:
+    url: https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1404-8-0-local-ga2_8.0.61-1_amd64-deb
+    dest: /tmp/cuda_install.deb
+    checksum: md5:a4b9657a8ee026e0c97270b2d4174a8a
+  when: "{{cuda_repo_ubuntu_install_check | failed}}"
+
+- name: CUDA | Install downloaded deb package for Ubuntu 14.04
+  apt:
+    deb: /tmp/cuda_install.deb
+  when: "{{cuda_repo_ubuntu_install_check | failed}}"
