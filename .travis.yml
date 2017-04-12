@@ -19,6 +19,13 @@ script:
   # First run
   - ansible-playbook -i inventory test.yml --connection=local --sudo
 
+  ## Tests:
+  # Verify driver version
+  cat /proc/driver/nvidia/version
+
+  # Test nvcc installed
+  command -v nvcc >/dev/null 2>&1
+
   # Second run Idempotence test
   - >
     ansible-playbook -i inventory test.yml --connection=local --sudo
