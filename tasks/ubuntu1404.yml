@@ -4,9 +4,6 @@
   changed_when: "{{cuda_repo_ubuntu_install_check | failed}}"
   ignore_errors: yes
 
-- debug:
-    msg: cuda_repo_ubuntu_install_check
-
 - name: CUDA | Download deb package for Ubuntu 14.04
   get_url:
     url: https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda-repo-ubuntu1404-8-0-local-ga2_8.0.61-1_amd64-deb
