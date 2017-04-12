@@ -20,11 +20,14 @@ script:
   - ansible-playbook -i inventory test.yml --connection=local --sudo
 
   ## Tests:
-  # Verify driver version
-  - cat /proc/driver/nvidia/version
-
   # Test nvcc installed
   - command -v nvcc >/dev/null 2>&1
+
+  # Test that CUDA libraries path is in LD_LIBRARY_PATH. In Ubuntu the path
+  # should be in /etc/ld.so.conf.d/<name>.conf file, which exists after cuda
+  # Installation. Verify, that it is the same as symlink from official
+  # documentation: /usr/local/cuda-8.0/lib64
+  - diff <(readlink --canonicalize /usr/local/cuda-8.0/lib64) /etc/ld.so.conf.d/cuda-8-0.conf 2>&1
 
   # Second run Idempotence test
   - >
