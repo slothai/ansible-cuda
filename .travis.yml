@@ -21,10 +21,10 @@ script:
 
   ## Tests:
   # Verify driver version
-  cat /proc/driver/nvidia/version
+  - cat /proc/driver/nvidia/version
 
   # Test nvcc installed
-  command -v nvcc >/dev/null 2>&1
+  - command -v nvcc >/dev/null 2>&1
 
   # Second run Idempotence test
   - >
