@@ -22,7 +22,9 @@ script:
   ## Tests:
   # Test nvcc installed. NOTE: refresh environment first.
   - export $(env | grep PATH)
-  - command -v nvcc >/dev/null 2>&1
+  - echo $PATH
+  # - command -v nvcc >/dev/null 2>&1
+  - command -v nvcc
 
   # Test that CUDA libraries path is in LD_LIBRARY_PATH. In Ubuntu the path
   # should be in /etc/ld.so.conf.d/<name>.conf file, which exists after cuda
