@@ -20,6 +20,7 @@ script:
   - ansible-playbook -i inventory test.yml --connection=local --sudo
 
   ## Tests:
+  export $(env | grep PATH)
   # Test nvcc installed
   - command -v nvcc >/dev/null 2>&1
 
