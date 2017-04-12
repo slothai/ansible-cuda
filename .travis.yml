@@ -20,8 +20,8 @@ script:
   - ansible-playbook -i inventory test.yml --connection=local --sudo
 
   ## Tests:
-  export $(env | grep PATH)
-  # Test nvcc installed
+  # Test nvcc installed. NOTE: refresh environment first.
+  - export $(env | grep PATH)
   - command -v nvcc >/dev/null 2>&1
 
   # Test that CUDA libraries path is in LD_LIBRARY_PATH. In Ubuntu the path
