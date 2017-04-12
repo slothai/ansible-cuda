@@ -1,7 +1,4 @@
 ---
-- debug:
-    msg: "Install recommended"
-
 - stat: "path={{cuda_samples_path}}"
   register: cuda_samples_path_stats
 
