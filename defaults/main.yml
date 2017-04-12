@@ -1,1 +1,4 @@
 ---
+cuda_install_recommended: false
+# Following is used only if cuda_install_recommended=true
+cuda_samples_path: /tmp/cuda_samples/
