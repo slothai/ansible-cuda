@@ -13,7 +13,7 @@
 
 - name: Add {{cuda_path_bin}} to PATH
   lineinfile:
-    name: /etc/environment
+    dest: /etc/environment
     state: present
     backrefs: yes
     regexp: 'PATH=(["]*)((?!.*?{{cuda_path_bin}}).*?)(["]*)$'
