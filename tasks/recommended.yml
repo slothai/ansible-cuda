@@ -1,0 +1,12 @@
+---
+- debug:
+    msg: "Install recommended"
+
+- stat: "path={{cuda_samples_path}}"
+  register: cuda_samples_path_stats
+
+- name: CUDA | Install writable samples
+  command: "cuda-install-samples-8.0.sh {{cuda_samples_path}}"
+  environment:
+    PATH: "{{cuda_path_bin}}:{{ ansible_env.PATH }}"
+  when: cuda_samples_path_stats.stat.exists == False

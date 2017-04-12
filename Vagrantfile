@@ -13,5 +13,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ansible.playbook = "test.yml"
     ansible.sudo = true
     ansible.verbose = "vvvv"
+    ansible.extra_vars = {
+      cuda_install_recommended: true
+    }
   end
 end

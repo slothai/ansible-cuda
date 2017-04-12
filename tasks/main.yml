@@ -4,6 +4,7 @@
   with_first_found:
     - files:
       - "{{ ansible_distribution | lower }}.yml"
+      - "common.yml"
       paths: vars
 
 - include: ubuntu.yml
@@ -11,10 +12,13 @@
     - ansible_distribution == 'Ubuntu'
     # - [[ $(lspci | grep -i nvidia) ]]
 
-- name: Add {{cuda_path_bin}} to PATH
+- name: Add {{cuda_path}}/bin to PATH
   lineinfile:
     dest: /etc/environment
     state: present
     backrefs: yes
-    regexp: 'PATH=(["]*)((?!.*?{{cuda_path_bin}}).*?)(["]*)$'
-    line: 'PATH=\1{{cuda_path_bin}}:\2\3'
+    regexp: 'PATH=(["]*)((?!.*?{{cuda_path}}/bin).*?)(["]*)$'
+    line: 'PATH=\1"{{cuda_path}}/bin":\2\3'
+
+- include: recommended.yml
+  when: "{{cuda_install_recommended}}"
